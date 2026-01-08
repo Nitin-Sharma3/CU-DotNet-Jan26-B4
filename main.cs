@@ -9,91 +9,88 @@ Write your code in this editor and press "Run" button to execute it.
 using System;
 class HelloWorld {
   static void Main() {
-     // ================================
-        // Exercise 1: 
-        // ================================
-        int[] attendance = { 45, 48, 50 };     
-        int totalDays = 60;
-        double percentage = (attendance[0] + attendance[1] + attendance[2]) * 100.0 / (3 * totalDays);
-        int displayPercentage = (int)percentage;
-        int roundedPercentage = (int)Math.Round(percentage); 
+   // Q1
+int attended = 23;
+int total = 55;
 
-        // ================================
-        // Exercise 2:
-        // ================================
-        int[] marks = { 78, 82, 91 };
-        double avg = (marks[0] + marks[1] + marks[2]) / 3.0;
-        double avgTwoDecimals = Math.Round(avg, 2);
-        int scholarshipScore = (int)avg;
+double percentage = (attended * 100.0) / total;
+int displayPercent = (int)Math.Round(percentage);
 
-        // ================================
-        // Exercise 3: 
-        // ================================
-        decimal finePerDay = 2.50m;
-        int daysOverdue = 7;
-        decimal totalFine = finePerDay * daysOverdue; 
-        double loggedFine = (double)totalFine;
+//Q2
+int totalMarks = 129;
+int subjects = 7;
 
-        // ================================
-        // Exercise 4:
-        // ================================
-        decimal balance = 10000m;
-        float interestRate = 6.5f; 
-        decimal monthlyInterest = balance * (decimal)interestRate / 1200;
-        balance += monthlyInterest;
+double average = totalMarks / (double)subjects;
+double roundedAvg = Math.Round(average, 2);
 
-        // ================================
-        // Exercise 5: 
-        // ================================
-        double cartTotal = 1999.99;
-        decimal tax = 0.18m;
-        decimal discount = 100m;
-        decimal finalPayable = (decimal)cartTotal + ((decimal)cartTotal * tax) - discount;
-        
-
-        // ================================
-        // Exercise 6: 
-        // ================================
-        short sensorReading = 305;
-        double temperatureC = sensorReading / 10.0;
-        int dashboardTemp = (int)Math.Round(temperatureC); 
-    
-
-        // ================================
-        // Exercise 7:
-        // ================================
-        double finalScore = 86.4;
-        byte grade;
-        if (finalScore >= 90) grade = 10;
-        else if (finalScore >= 80) grade = 9;
-        else if (finalScore >= 70) grade = 8;
-        else grade = 5;
-  
-
-        // ================================
-        // Exercise 8: 
-        // ================================
-        long bytesUsed = 5_368_709_120; // bytes
-        double mbUsed = bytesUsed / (1024.0 * 1024);
-        double gbUsed = bytesUsed / (1024.0 * 1024 * 1024);
-        int monthlySummaryGB = (int)Math.Round(gbUsed);
+int scholarshipScore = (int)Math.Floor(roundedAvg);
 
 
-        // ================================
-        // Exercise 9: 
-        // ================================
-        int itemCount = 45000;
-        ushort maxCapacity = 50000;
-        bool withinLimit = itemCount <= maxCapacity; 
-       
+//Q3
+decimal finePerDay = 2.50m;
+int daysLate = 7;
 
-        // ================================
-        // Exercise 10: 
-        // ================================
-        int basicSalary = 30000;
-        double allowance = 5500.75;
-        double deduction = 1200.25;
-        decimal netSalary = basicSalary + (decimal)allowance - (decimal)deduction;
+decimal totalFine = finePerDay * daysLate;
+double analyticsFine = (double)totalFine;
+
+//Q4
+decimal balance = 100000m;
+float rate = 7.5f;
+
+decimal interestRate = (decimal)rate / 100;
+decimal interest = balance * interestRate / 12;
+
+balance += interest;
+
+//Q5
+double cartTotal = 999.99;
+decimal taxRate = 0.18m;
+
+decimal total = (decimal)cartTotal;
+decimal tax = total * taxRate;
+decimal finalAmount = total + tax;
+
+
+//Q6
+
+short sensorValue = 325;
+double celsius = sensorValue / 10.0;
+
+int displayTemp = (int)Math.Round(celsius);
+
+//Q7
+
+double score = 87.5;
+byte grade;
+
+if (score >= 90) grade = 10;
+else if (score >= 80) grade = 9;
+else grade = 8;
+
+//Q8
+long bytesUsed = 5368709120; 
+
+double gb = bytesUsed / (1024.0 * 1024 * 1024);
+int roundedGB = (int)Math.Round(gb);
+
+//Q9
+int items = 500;
+ushort maxCapacity = 600;
+
+if (items >= maxCapacity)
+{
+    Console.WriteLine(“Cant store anymore”);
+}
+//
+    Q10
+
+int basic = 30000;
+double allowance = 5230.75;
+double deduction = 1800.25;
+
+decimal netSalary = basic
+    + (decimal)allowance
+    - (decimal)deduction;
 
   }
 }
