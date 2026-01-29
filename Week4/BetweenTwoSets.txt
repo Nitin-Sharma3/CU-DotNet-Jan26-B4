@@ -1,0 +1,37 @@
+class Result
+{
+    public static int GCDe(int a, int b)
+    {
+        if (b == 0) return a;
+        return GCDe(b, a % b);
+    }
+
+    public static int LCMe(int a, int b)
+    {
+        return (a * b) / GCDe(a, b);
+    }
+
+    public static int getTotalX(List<int> a, List<int> b)
+    {
+        int lcm = a[0];
+        for (int i = 1; i < a.Count; i++)
+        {
+            lcm = LCMe(lcm, a[i]);
+        }
+
+        int gcd = b[0];
+        for (int i = 1; i < b.Count; i++)
+        {
+            gcd = GCDe(gcd, b[i]);
+        }
+
+        int count = 0;
+        for (int i = lcm; i <= gcd; i += lcm)
+        {
+            if (gcd % i == 0)
+                count++;
+        }
+
+        return count;
+    }
+}
