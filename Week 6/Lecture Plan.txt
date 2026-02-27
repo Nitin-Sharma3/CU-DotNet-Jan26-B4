@@ -1,0 +1,214 @@
+DAY1
+Discussion about core fundamentals:
+Complexities of Code
+STL in languages
+Introduction to Industry based placement processes
+Analyze various Codes
+Array/List Discussions and various Operations
+-Discussion and Q/A session 
+
+
+DAY2
+Advanced Arrays Concepts:
+Two sum (warm-up discussion)
+Prefix Sum
+Kadane 's Algorithm
+Majority Element
+-Discussion and Q/A session 
+
+DAY3
+Strings
+String Manipulation
+Substring and Concatenation
+Palindromic String
+Reverse Words in a String
+Substring and Concatenation
+
+
+DAY4
+More Concepts in Array:
+Linear and Binary Search in Arrays
+Questions related to searching
+Two Pointer Approach
+Remove Duplicates
+-Discussion and Q/A session 
+
+DAY5
+Sliding window Variations in Array:
+Fixed Window
+Variable Window
+Longest substring Problems 
+Max sum subarray k
+-Discussion and Q/A session 
+
+DAY6
+Deep Dive into Sorting Techniques:
+Bubble, Insertion, Selection Sorts
+Merge Sort
+Quick Sort
+When to use what and their Complexity Comparison.
+-Discussion and Q/A session 
+
+DAY7
+Hashing 
+Frequency Maps
+Set Usage
+Subarray sum = k 
+Longest Consecutive sequence
+Anagram grouping
+-Discussion and Q/A session 
+
+DAY8
+Stack
+Applications and where to use it.
+Operations on Stack
+Monotonic Stack
+Next Greater Element
+Questions on Stack:
+Valid Parentheses
+-Discussion and Q/A session 
+
+DAY9
+Queue & Deque
+Applications of Queue
+Circular Queue
+Sliding Window Maximum
+-Discussion and Q/A session 
+
+DAY10
+Priority Queue/Heap
+Min Heap/Max Heap
+Kth Largest Element
+Top K frequent
+Difference between heap and sorting
+-Discussion and Q/A session 
+
+DAY11
+Bit Manipulation
+XOR properties
+Set/Unset/Toggle bit
+Power of 2
+Single number of problems
+-Discussion and Q/A session 
+
+
+DAY12
+Math Theories in DSA
+GCD/LCM
+Sieve of Eratosthenes
+Fast Power
+Modular arithmetic intro
+-Discussion and Q/A session
+
+DAY13
+Greedy Algorithms
+Activity Selection
+Jump Game Series
+Coin Change (Greedy Approach)
+-Discussion and Q/A session
+
+DAY14
+Linked List
+Structure/Insertion/Deletion
+Reverse a Linked List 
+Detect Cycle(Slow Fast Pointer)
+-Discussion and Q/A session
+
+DAY15
+Recursion
+Recursion visualization and types
+Basic problems for understanding(like Factorial)
+Subset Generation
+Permutations
+-Discussion and Q/A session
+
+DAY16
+More on Recursion and Backtracking
+Difference between these two
+Decision Tree Thinking
+Subset Sum
+Generate Parentheses
+Combination Sum
+-Discussion and Q/A session
+
+DAY17
+Matrix and 2D Array Problems
+Matrix Traversal
+Operations in a matrix
+Searching in a 2D Matrix
+Transpose a Matrix
+Inverse a Matrix
+-Discussion and Q/A session
+
+
+DAY18
+Matrix in depth Questions
+Spiral Matrix
+Rotate a Matrix
+Set Zeroes
+-Discussion and Q/A session
+
+DAY19
+Pattern Recognition of Questions
+Discussion on question based on following topics
+Sliding Window
+Hashing
+Greedy
+Recursion
+Mixed Practice/Contest Session
+-Discussion and Q/A session
+
+DAY20
+Industry based Interview DSA questions
+How to explain approaches
+In depth Theory Questions
+Cover-up all the above mentioned topics
+-Discussion and Q/A session
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
