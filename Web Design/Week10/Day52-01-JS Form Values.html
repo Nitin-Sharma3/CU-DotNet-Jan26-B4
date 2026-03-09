@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function showName(){
+            var ename = document.getElementById('ename');
+            var age = document.getElementById('age');
+            var city = document.getElementById('city');
+            var dob = document.getElementById('dob');
+            var mail = document.getElementById('email');
+            var gender = document.getElementsByName('Gender');
+            let g="";
+            for (let i = 0; i < gender.length; i++) {
+
+                if(gender[i].checked)g = gender[i].value;
+            }
+            console.log('submitted-> name:'+ename.value+' age: '+age.value+' city: '+city.value+' dob:'+dob.value+' mail:'+mail.value+' gender: '+g);
+        }
+    </script>
+</head>
+<body>
+    <h1>Employee Registration Form:</h1>
+    <form onsubmit="showName(); return false;">
+        <table>
+            <tr>
+                <td>
+                    <label>Enter Your Name</label>
+                </td>
+                <td>
+                    <input type="text"
+                    pattern="[A-Z]{1}[a-z]{1,}"
+                     name = "ename" id="ename" />
+                </td>
+            </tr>
+             <tr>
+                <td>
+                    <label>Enter Age</label>
+                </td>
+                <td>
+                    <input type="number"
+                     name = "age" id="age" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Select Gender</label>
+                </td>
+                <td>
+                    <input type="radio" name="Gender" id = "male" value="M" />
+                    <label for="male">Male</label>
+                    <input type="radio" name="Gender" id="female" value="F" />
+                    <label for="female">Female</label>
+                </td>
+                <tr>
+                    <td>
+                        <label>Select City</label>
+                    </td>
+                    <td>
+                        <select id="city" name="city" >
+                            <option value="">Select</option>
+                            <option value="1">Himachal Pradesh</option>
+                            <option value="2">Mumbai</option>
+                            <option value="3">Bangalore</option>
+                            <option value="4">Delhi</option>
+                            <option value="5">Chandigarh</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                <tr>
+                    <tr>
+                    <td>
+                        <label>Select DOB</label>
+                    </td>
+                    <td>
+                        <input type="date" 
+                        name = "dob" id="dob" min="2000-01-01"
+                        max="2010-12-31"
+                        "/>
+                    </td>
+                </tr>
+                    <td>
+                        <label>Enter Your Email</label>
+                    </td>
+                    <td>
+                        <input type="email" name = "email" 
+                        id="email"
+                        placeholder = "abc@gmail.com"/>
+                    </td>
+                </tr>
+                <td>
+                </td>
+                <td>
+                    <input type="submit"/>
+                    <input type="reset"/>
+                </td>
+            </tr>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
