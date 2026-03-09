@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Day52 Assignment</title>
+  </head>
+  <body>
+    <input id="no1" onblur="checker(this)" type="text" /> +
+    <input id="no2" onblur="checker(this)" type="text" />
+    <button onclick="validate()">=</button>
+    <input id="ans" type="text" readonly />
+    <script>
+      var a = document.getElementById("no1");
+      var b = document.getElementById("no2");
+      var ans = document.getElementById("ans");
+      function validate() {
+        if (!isNaN(Number(a.value)) && !isNaN(Number(b.value)))
+          ans.value = parseInt(a.value) + parseInt(b.value);
+      }
+      //         function checker(z){
+
+      //     if(z.value==""){
+      //         z.style.backgroundColor='red';
+      //         return;
+      //     }
+
+      //     if(isNaN(Number(z.value))){
+      //         z.style.backgroundColor='yellow';
+      //     }else{
+      //         z.style.backgroundColor='white';
+      //     }
+      // }
+      function checker(z) {
+        if (z.value == "") z.style.backgroundColor = "red";
+        if (isNaN(Number(z.value))) z.style.backgroundColor = "yellow";
+      }
+    </script>
+  </body>
+</html>
