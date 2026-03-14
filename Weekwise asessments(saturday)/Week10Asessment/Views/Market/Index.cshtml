@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+@{
+    string tg = ViewData["topgainer"] as string;
+    string vol = ViewData["Volume"] as string;
+}
+<h1>MARKET</h1>
+<div class="alert alert-primary" role="alert">
+    <h5>@ViewBag.MarketStatus</h5>
+</div>
+<div class="card" style="width: 18rem;">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">topGainer : @tg</p>
+        <p class="card-text">Volumer : @vol</p>
+
+    </div>
+</div>
+
