@@ -1,0 +1,271 @@
+﻿@model IEnumerable<FinTrackPro.Models.Account>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Accounts</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Add New Account</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountHolderName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Balance)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountNumber)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountHolderName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountName)
+                </td>
+
+                <td>
+                    <span id="balance-@item.Id" data-original-balance="@item.Balance">@item.Balance.ToString("C")</span>
+                </td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
+
+                    <!-- Accordion Button -->
+                    <button class="btn btn-sm btn-dark text-white"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#transactions-@item.Id">
+                        View Transactions
+                    </button>
+                </td>
+            </tr>
+
+            <!-- Accordion Transactions Row -->
+
+            <tr class="collapse" id="transactions-@item.Id">
+                <td colspan="5">
+
+                    <h5>Transactions</h5>
+
+                    <!-- Transaction summary (calculated client-side) -->
+                    <div class="transaction-summary mb-3" id="summary-@item.Id" style="display:none">
+                        <div><strong>Total Credits:</strong> <span id="total-credits-@item.Id">-</span></div>
+                        <div><strong>Total Debits:</strong> <span id="total-debits-@item.Id">-</span></div>
+                        <div><strong>Net Change:</strong> <span id="net-change-@item.Id">-</span></div>
+                        <div><strong>New Balance:</strong> <span id="new-balance-@item.Id">-</span></div>
+                    </div>
+
+                    @if (item.Transactions != null && item.Transactions.Any())
+                    {
+                        <table class="table table-sm table-bordered">
+
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Amount</th>
+                                    <th>Category</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                @foreach (var t in item.Transactions)
+                                {
+                                    <tr>
+                                        <td>@t.Description</td>
+                                        <td data-amount="@t.Amount" data-category="@t.Category" class="@(t.Category == "Credit" ? "text-success" : (t.Category == "Debit" ? "text-danger" : ""))">@(t.Category == "Credit" ? "+" + t.Amount.ToString("C") : "-" + t.Amount.ToString("C"))</td>
+                                        <td>@t.Category</td>
+                                        <td>@t.Date.ToShortDateString()</td>
+                                    </tr>
+                                }
+
+                            </tbody>
+
+                        </table>
+                    }
+                    else
+                    {
+                        <p>No transactions available.</p>
+                    }
+
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+
+@section Scripts {
+    <script>
+        (function () {
+            function formatCurrency(value) {
+                try {
+                    return value.toLocaleString(undefined, { style: 'currency', currency: 'USD' });
+                } catch (e) {
+                    return value.toFixed(2);
+                }
+            }
+
+            function parseNumber(val) {
+                var n = parseFloat(val);
+                return isNaN(n) ? 0 : n;
+            }
+
+            var collapses = document.querySelectorAll('tr.collapse[id^="transactions-"]');
+            collapses.forEach(function (collapseEl) {
+                collapseEl.addEventListener('shown.bs.collapse', function () {
+                    var id = collapseEl.id.replace('transactions-', '');
+                    var balanceEl = document.getElementById('balance-' + id);
+                    var summaryEl = document.getElementById('summary-' + id);
+                    if (!balanceEl) return;
+
+                    var original = parseNumber(balanceEl.getAttribute('data-original-balance'));
+
+                    var rows = collapseEl.querySelectorAll('tbody tr');
+                    var credits = 0;
+                    var debits = 0;
+                    var running = original;
+                    // Reset any previous per-row classes
+                    rows.forEach(function (r) {
+                        r.classList.remove('table-danger');
+                        var amtCell = r.querySelector('[data-amount]');
+                        if (amtCell) {
+                            amtCell.classList.remove('text-danger');
+                            amtCell.classList.remove('text-success');
+                        }
+                    });
+
+                    rows.forEach(function (r) {
+                        var amtCell = r.querySelector('[data-amount]');
+                        if (!amtCell) return;
+                        var amt = parseNumber(amtCell.getAttribute('data-amount'));
+                        var category = (amtCell.getAttribute('data-category') || '').toLowerCase();
+
+                        if (category === 'credit') {
+                            credits += amt;
+                            running += amt;
+                            amtCell.classList.add('text-success');
+                        } else if (category === 'debit') {
+                            debits += amt;
+                            // mark debit in red
+                            amtCell.classList.add('text-danger');
+                            // Check availability
+                            if (running >= amt) {
+                                running -= amt;
+                                // debit processed normally
+                            } else {
+                                // insufficient funds for this debit (highlight row)
+                                r.classList.add('table-danger');
+                                // still subtract to show resulting negative balance
+                                running -= amt;
+                            }
+                        } else {
+                            // fallback: treat positive as credit, negative as debit
+                            if (amt >= 0) {
+                                credits += amt;
+                                running += amt;
+                                amtCell.classList.add('text-success');
+                            } else {
+                                debits += Math.abs(amt);
+                                if (running >= Math.abs(amt)) {
+                                    running += amt; // amt negative
+                                } else {
+                                    amtCell.classList.add('text-danger');
+                                    r.classList.add('table-danger');
+                                    running += amt;
+                                }
+                            }
+                        }
+                    });
+
+                    var net = credits - debits;
+                    var newBalance = original + net;
+                    balanceEl.textContent = formatCurrency(newBalance);
+
+                    balanceEl.classList.toggle('text-danger', newBalance < 0);
+                    balanceEl.classList.toggle('text-success', newBalance >= 0);
+
+                    // Update and show summary
+                    if (summaryEl) {
+                        var creditsEl = document.getElementById('total-credits-' + id);
+                        var debitsEl = document.getElementById('total-debits-' + id);
+                        var netEl = document.getElementById('net-change-' + id);
+                        var newBalEl = document.getElementById('new-balance-' + id);
+
+                        if (creditsEl) creditsEl.textContent = formatCurrency(credits);
+                        if (debitsEl) debitsEl.textContent = formatCurrency(debits);
+                        if (netEl) netEl.textContent = formatCurrency(net);
+                        if (newBalEl) newBalEl.textContent = formatCurrency(newBalance);
+
+                        summaryEl.style.display = '';
+                    }
+                });
+
+                collapseEl.addEventListener('hidden.bs.collapse', function () {
+                    var id = collapseEl.id.replace('transactions-', '');
+                    var balanceEl = document.getElementById('balance-' + id);
+                    var summaryEl = document.getElementById('summary-' + id);
+                    if (!balanceEl) return;
+
+                    var original = parseNumber(balanceEl.getAttribute('data-original-balance'));
+                    balanceEl.textContent = formatCurrency(original);
+
+                    balanceEl.classList.toggle('text-danger', original < 0);
+                    balanceEl.classList.toggle('text-success', original >= 0);
+
+                    // Hide/reset summary and clear per-row classes
+                    if (summaryEl) {
+                        var creditsEl = document.getElementById('total-credits-' + id);
+                        var debitsEl = document.getElementById('total-debits-' + id);
+                        var netEl = document.getElementById('net-change-' + id);
+                        var newBalEl = document.getElementById('new-balance-' + id);
+
+                        if (creditsEl) creditsEl.textContent = '-';
+                        if (debitsEl) debitsEl.textContent = '-';
+                        if (netEl) netEl.textContent = '-';
+                        if (newBalEl) newBalEl.textContent = '-';
+
+                        summaryEl.style.display = 'none';
+                    }
+
+                    // Clear per-row classes
+                    var rows = collapseEl.querySelectorAll('tbody tr');
+                    rows.forEach(function (r) {
+                        r.classList.remove('table-danger');
+                        var amtCell = r.querySelector('[data-amount]');
+                        if (amtCell) {
+                            amtCell.classList.remove('text-danger');
+                            amtCell.classList.remove('text-success');
+                        }
+                    });
+                });
+            });
+        })();
+    </script>
+}
