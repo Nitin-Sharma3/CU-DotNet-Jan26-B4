@@ -1,0 +1,28 @@
+﻿
+@model IEnumerable<Day61_01.Models.ViewModels.UserRolesViewModel>
+
+@{
+    ViewData["Title"] = "Accounts";
+}
+
+<h1>Accounts</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Email</th>
+            <th>Roles</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach(var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Email</td>
+            <td>@item.Roles</td>
+        </tr>
+    }
+    </tbody>
+</table>

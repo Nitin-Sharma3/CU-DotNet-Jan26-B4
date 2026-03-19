@@ -1,0 +1,109 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<div class="container d-flex align-items-center justify-content-center vh-100">
+    <div class="row w-100 justify-content-center">
+
+        <!-- LOGIN CARD -->
+        <div class="col-md-5">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-body p-4">
+
+                    <h2 class="text-center fw-bold mb-2">Welcome Back 👋</h2>
+                    <p class="text-center text-muted mb-4">Login to continue</p>
+
+                    <form id="account" method="post">
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
+
+                        <!-- Email -->
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Email" class="form-control rounded-3" placeholder="name@example.com" />
+                            <label asp-for="Input.Email">Email</label>
+                            <span asp-validation-for="Input.Email" class="text-danger small"></span>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Password" class="form-control rounded-3" placeholder="Password" />
+                            <label asp-for="Input.Password">Password</label>
+                            <span asp-validation-for="Input.Password" class="text-danger small"></span>
+                        </div>
+
+                        <!-- Remember Me -->
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" asp-for="Input.RememberMe" />
+                            <label class="form-check-label" asp-for="Input.RememberMe">
+                                @Html.DisplayNameFor(m => m.Input.RememberMe)
+                            </label>
+                        </div>
+
+                        <!-- Login Button -->
+                        <button id="login-submit" type="submit" class="btn btn-primary w-100 rounded-3 fw-semibold">
+                            Log in
+                        </button>
+
+                        <!-- Links -->
+                        <div class="text-center mt-3 small">
+                            <a id="forgot-password" asp-page="./ForgotPassword" class="text-decoration-none">Forgot password?</a><br />
+                            <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="text-decoration-none">Create account</a><br />
+                            <a id="resend-confirmation" asp-page="./ResendEmailConfirmation" class="text-decoration-none">Resend confirmation</a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- EXTERNAL LOGIN -->
+        <div class="col-md-4 mt-4 mt-md-0">
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-body p-4">
+
+                    <h5 class="text-center mb-3">Or login with</h5>
+                    <hr />
+
+                    @{
+                        if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                        {
+                            <p class="text-muted text-center small">
+                                No external login configured.
+                            </p>
+                        }
+                        else
+                        {
+                            <form id="external-account"
+                                  asp-page="./ExternalLogin"
+                                  asp-route-returnUrl="@Model.ReturnUrl"
+                                  method="post">
+
+                                <div class="d-grid gap-2">
+                                    @foreach (var provider in Model.ExternalLogins!)
+                                    {
+                                        <button type="submit"
+                                                class="btn btn-outline-dark rounded-3"
+                                                name="provider"
+                                                value="@provider.Name">
+                                            Continue with @provider.DisplayName
+                                        </button>
+                                    }
+                                </div>
+
+                            </form>
+                        }
+                    }
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
