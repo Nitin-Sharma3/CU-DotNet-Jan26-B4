@@ -1,0 +1,17 @@
+[
+  {
+    "Id": 1,
+    "Name": "Billu Sharma",
+    "Grade": "A"
+  },
+  {
+    "Id": 2,
+    "Name": "Chillu Sharma",
+    "Grade": "A"
+  },
+  {
+    "Id": 3,
+    "Name": "Tillu Sharma",
+    "Grade": "B"
+  }
+]
