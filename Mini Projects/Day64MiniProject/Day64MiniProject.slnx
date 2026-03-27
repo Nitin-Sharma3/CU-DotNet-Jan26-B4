@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/Services/">
+    <Project Path="Day64MiniProject/Day64MiniProject.csproj" />
+    <Project Path="WebAPIAuth/WebAPIAuth.csproj" Id="48e15504-53dd-4d42-8540-05a655477084" />
+  </Folder>
+</Solution>
