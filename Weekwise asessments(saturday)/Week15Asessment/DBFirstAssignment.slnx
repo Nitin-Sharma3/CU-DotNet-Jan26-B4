@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="DBFirstAssignment/NorthwindAPI.csproj" />
+  <Project Path="Northwind.test/Northwind.test.csproj" />
+  <Project Path="NorthwindMVC/NorthwindMVC.csproj" />
+</Solution>
